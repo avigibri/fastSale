@@ -1,0 +1,241 @@
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>The Best Coupons Site</title>
+		<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1" />
+		<link href="jquery-mobile/jquery.mobile.structure-1.0.min.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+		<link rel="stylesheet" href="themes/my_company.min.css" />
+		<link rel="stylesheet" href="includes/overrides.css" />
+		<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="includes/handlebars-v1.3.0.js"></script>
+		<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js">
+	
+		<script type="text/javascript" src="includes/custom.js"></script>
+
+    <script>
+    $(function() {
+		    $("a#allCoupons").click(function (event){
+			
+		    	$.ajax({url : "Manager/coupons",
+						dataType : "json",
+						type : "get"
+						}).done(function(inputResult) {
+						console.log(inputResult);	
+						  
+						  /*var source   = $("#copounsTemplate").html();
+						  var template = Handlebars.compile(source);
+						  var data = { coupon:inputResult};
+						  var html = template(data);*/
+						  var html = '';
+						  
+						  for (var i in inputResult)
+						  {
+						  	html += 	"<li>" + 
+										"<img id='photo' src='" + inputResult[i].path  + "'/>" +
+										"<h2 id='details'>" +
+										inputResult[i].details +
+										"</h2>" + 
+										"<p id='price'>" +
+										inputResult[i].price +
+										"</p>" +
+										"<a href='#purchase' data-rel='popup' data-position-to='window' data-transition='pop'>Purchase album</a>" + 
+										"</li>";
+						  }
+						  
+						  console.log(html);
+						  $("ul#item_list").append(html);  
+						  
+										  var href = $('#allCoupons').attr('href');
+				    					  window.location.href = href;	
+    					  
+    					  			     $("a#backFromAllCoupons").click(function (event){
+									     	console.log("here");
+									     	$("#allCouponsService").empty();
+									     	
+									     });
+			     											
+						});  
+						
+						console.log($("#allCouponsService").html());
+			
+				event.preventDefault(); 	
+				
+			    });
+			    
+
+			     
+	});
+    
+    </script>
+	    <script id="copounsTemplate" type="text/x-handlebars-template">
+	    </script>
+	</head>
+	<body>
+
+		<div data-role="page" id="home" data-theme="a">
+			<div data-role="header">
+				<h1>Homepage</h1>
+			</div>
+			<div data-role="content">
+				<ul data-role="listview">
+					<li class="btn_a"><a href="#about_us">About Us</a></li>
+		            <li class="btn_s"><a href="#services">Services</a></li>
+					<li class="btn_l"><a href="#locations">Locations</a></li>
+					<li class="btn_c"><a href="#contact_us">Contact Us</a></li>
+				</ul>
+			</div>
+			<div data-role="footer">
+				<h4>©2014 Fast Sale</h4>
+			</div>
+		</div>
+		
+		<div data-role="page" id="about_us" data-title="About Us">
+			<div data-role="header">
+				<h1>About Us</h1>
+				<a href="#" data-rel="back" data-icon="arrow-l" data-iconpos="notext">back</a>
+			</div>
+			<div data-role="content">
+				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				<p><img style="float:right;margin-left:15px;" src="images/photo_about_us.jpg" />Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+			</div>
+			<div data-role="footer">
+				<div data-role="controlgroup" data-type="horizontal">
+					<a href="#home" data-role="button" data-icon="home">Home</a>
+					<a href="#contact_us" data-role="button" data-icon="grid">Contact Us</a>
+				</div>
+				<h4>©2012 Your Company</h4>
+			</div>
+		</div>
+		
+		<div data-role="page" id="services" data-title="Services">
+			<div data-role="header">
+				<h1>Services</h1>
+				<a href="#" data-rel="back" data-icon="arrow-l" data-iconpos="notext">back</a>
+			</div>
+			<div data-role="content">
+				<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<div data-role="controlgroup">
+					<a id="allCoupons" href="#allCouponsService" data-role="button" data-icon="arrow-r" data-iconpos="right">First Service</a>
+					<a href="services/service_02.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Second Service</a>
+					<a href="services/service_03.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Third Service</a>
+				</div>
+				<p>Find a <a href="#locations">location near you</a>.</p>
+			</div>
+			<div data-role="footer">
+				<div data-role="controlgroup" data-type="horizontal">
+					<a href="#home" data-role="button" data-icon="home">Home</a>
+					<a href="#contact_us" data-role="button" data-icon="grid">Contact Us</a>
+				</div>
+				<h4>©2012 Your Company</h4>
+			</div>
+		</div>
+		
+		<div data-role="page" id="locations" data-title="Find a Locations">
+			<div data-role="header">
+				<h1>Locations</h1>
+				<a href="#" data-rel="back" data-icon="arrow-l" data-iconpos="notext">back</a>
+			</div>
+			<div data-role="content">
+				<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+				<h2>Find a location</h2>
+				<ul data-role="listview" data-filter="true" data-inset="true" class="countries">
+					<li><a class="location" href="#contact_us" data-phone="123-456-7891">Albania</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7892">Algeria</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7893">Argentina</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7894">Belgium</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7895">Belize</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7896">Bulgaria</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7897">Canada</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7898">Croatia</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7899">Cyprus</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7890">Czech Republic</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7891">Denmark</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7892">Estonia</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7893">Finland</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7894">Germany</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7895">Ghana</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7896">India</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7897">Indonesia</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7898">Jamaica</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7899">Japan</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7890">Libya</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7891">Lithuania</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7892">Mexico</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7893">Netherlands</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7894">New Zealand</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7895">Paraguay</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7896">Russia</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7897">Saudi Arabia</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7898">Switzerland</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7899">Syria</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7890">Turkey</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7891">Ukraine</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7892">United Arab Emirates</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7893">United Kingdom</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7894">United States of America</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7895">Yemen</a></li>
+					<li><a class="location" href="#contact_us" data-phone="123-456-7896">Yugoslavia</a></li>
+				</ul>
+			</div>
+			<div data-role="footer">
+				<div data-role="controlgroup" data-type="horizontal">
+					<a href="#home" data-role="button" data-icon="home">Home</a>
+					<a href="#contact_us" data-role="button" data-icon="grid">Contact Us</a>
+				</div>
+				<h4>©2012 Your Company</h4>
+			</div>
+		</div>
+		
+		<div data-role="page" id="contact_us" data-title="Contact Us">
+			<div data-role="header">
+				<h1>Contact Us</h1>
+				<a href="#" data-rel="back" data-icon="arrow-l" data-iconpos="notext">back</a>
+			</div>
+			<div data-role="content" class="content_container">
+				<h1>Your Company</h1>
+				<p class="instructions">Choose one of our <a href="#locations">locations</a> for contact information.</p>
+				<p class="contact_info"><a class="phonelink" href="tel:5555555555">(555) 555-5555</a></p>
+				<p class="contact_info">Find more <a href="#locations">locations</a> here.</p>
+			</div>
+			<div data-role="footer">
+				<div data-role="controlgroup" data-type="horizontal">
+					<a href="#home" data-role="button" data-icon="home">Home</a>
+				</div>
+				<h4>©2012 Your Company</h4>
+			</div>
+		</div>
+			<div data-role="page" id="allCouponsService" data-title="First Services">
+			
+			<div data-role="header">
+				<h1>First Service</h1>
+				<a id="backFromAllCoupons" href="#" data-rel="back" data-icon="arrow-l" data-iconpos="notext">back</a>
+			</div>
+			<div data-role="content"  data-theme="a">
+				<ul id="item_list" data-role="listview" data-split-icon="gear" data-split-theme="d" data-inset="true">				
+
+			    </ul>
+								
+						<div data-role="popup" id="purchase" data-theme="d" data-overlay-theme="a" style="max-width:340px; padding-bottom:2em;">
+							<h3>Purchase Album?</h3>
+							<p>Your download will begin immediately on your mobile device when you purchase.</p>
+							<a href="index.html" data-role="button" data-rel="back" data-theme="b" data-icon="check" data-inline="true" data-mini="true">Buy: $10.99</a>
+							<a href="index.html" data-role="button" data-rel="back" data-inline="true" data-mini="true">Cancel</a>	
+						</div>
+		
+			</div>
+			<div data-role="footer">
+				<div data-role="controlgroup" data-type="horizontal">
+					<a href="#home" data-role="button" data-icon="home">Home</a>
+					<a href="#contact_us" data-role="button" data-icon="grid">Contact Us</a>
+				</div>
+				<h4>ֲ©2014 Fast Sale</h4>
+			</div>	
+		    </div>
+
+
+	</body>
+</html>

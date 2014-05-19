@@ -1,0 +1,14 @@
+--<ScriptOptions statementTerminator=";"/>
+
+
+
+CREATE TABLE cb_this_is_db.business(businessid INTEGER NOT NULL,
+    businessCode VARCHAR(20) NULL,
+    businessName VARCHAR(20) NULL,
+    phone VARCHAR(20) NOT NULL,
+    mail VARCHAR(20) NULL,
+    location VARCHAR(20) NULL,
+    password VARCHAR(20) NULL,
+    gender VARCHAR(20) NULL,
+    email VARCHAR(20) NULL,
+    PRIMARY KEY (businessid));

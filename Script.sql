@@ -1,0 +1,1 @@
+SELECT * FROM cb_this_is_db.bus
